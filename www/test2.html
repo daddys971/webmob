@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<script type="text/javascript">
+	function listePlugin() {
+
+		for (i = 0; i < navigator.plugins.length; i++) {
+
+			var plugin = navigator.plugins[i];
+
+			document.write(plugin.name + ' ' + plugin.filename + ' '
+					+ plugin.description + '<br\>');
+
+		}
+	}
+
+	function decompte(valeur) {
+		console.log(valeur)
+		if (valeur == 0) {
+			console.log("test");
+			window
+					.open(
+							"popup.html",
+							"popup",
+							"location=no, menubar=no, resizable=no, scrollbar=no, status=no, toobar=no, top=250, left=150, width=300, height=200");
+		} else {
+			doc = document.getElementById("leaff");
+			doc.innerHTML = "<h1>" + valeur + "</h1>";
+			valeur--;
+			chrono = setTimeout("decompte(" + valeur + ")", 1000)
+		}
+
+	}
+
+	function enfant_m_appel(quoi) {
+		doc = document.getElementById("leaff");
+		doc.innerHTML = "<h1>" + quoi + "</h1>";
+	}
+
+	function appel() {
+		fenetre.appel();
+	}
+</script>
+</head>
+
+<body onload="listePlugin()">
+	lancement Popup
+	<input type="button" value="go" onclick="decompte(10)" />
+	<div name="leaff" id="leaff"></div>
+	<br />
+	<br />
+	<input type="button" value="Arreter le lancement"
+		onclick="clearTimeOut(chrono)" />
+	<br />
+	<br />
+	<input type="button" value="Appel à popup" onclick="appel()" />
+	<br />
+	<br />
+</body>
+</html>

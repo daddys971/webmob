@@ -4,8 +4,8 @@ Objectif : Re-écrire nos page avec du html5 et CSS3
 Résumé   : Rajouter des fonctionnalités videos et geolocalisation sur nos page
 
 1. Changement des balises
-  * Utiliser la balise <nav> pour le menu et dans le pied de page
-  * Utiliser la balise <header> à la place de la balise div.wrapper contenant le logo et le titre de la page
+  
+  
   * Utiliser la balise <hgroup> à la place de notre classe .titre
   * Utiliser la balise <section> pour le wrapper du contenu
   * Utiliser la balise <article> à la place de notre #content

@@ -1,0 +1,85 @@
+<!doctype html>
+<html>
+<head>
+<title>drag and drop</title>
+<script language="javascript" type="text/javascript">
+<!--
+	var isdrag = false;
+	var x, y;
+	var dobj;
+	function movemouse(ev) {
+		console.log("movemouse")
+		if (isdrag) 
+		{
+			var lex, ley
+			//pour ie qui transmet pas l'evenement
+			if (!ev) 
+			{
+				ev = event;
+			}
+			lex = tx + ev.clientX - x;
+			ley = ty + ev.clientY - y;
+			if (lex > 0) 
+			{
+				dobj.style.left = lex + "px"
+			}
+			if (ley > 0) 
+			{
+				dobj.style.top = ley + "px"
+			}
+			return false;
+		}
+	}
+	function selectmouse(ev) 
+	{
+		console.log("selectmouse")
+		if (ev) 
+		{
+			var fobj = ev.target;
+		}
+		else
+		{
+			var fobj = event.srcElement;
+			ev = event;
+		}
+		
+		x = ev.clientX;
+		y = ev.clientY;
+		if (fobj.id == "palette") 
+		{
+			console.log("startdrag")
+			isdrag = true;
+			dobj = fobj;
+			document.onmousemove = movemouse;
+			tx = parseInt(dobj.style.left);
+			ty = parseInt(dobj.style.top);
+			return false
+		}
+	}
+	document.onmousedown = selectmouse;
+	document.onmouseup = function() {
+		isdrag = false;
+	};
+//-->
+</script>
+</head>
+<body bgcolor="#FFFFCC">
+	<div id="palette" style="position: absolute; left: 10px; top: 10px; width: 100px; height: 300px; z-index: 100; background-color: #CCCCFF; padding: 10px; border: solid 1px black; text-align: center;">
+		<span style="font-weight: bold;">Changer la couleur de fond</span> <br />
+		<br /> 
+		<span onClick="document.getElementById('aff').style.backgroundColor ='red';" style="cursor: pointer">Rouge</span>
+		<br /> 
+		<span onClick="document.getElementById('aff').style.backgroundColor ='green';" style="cursor: pointer">Vert</span>
+		<br /> 
+		<span onClick="document.getElementById('aff').style.backgroundColor ='lightblue';" style="cursor: pointer">bleu</span>
+		<br /> 
+		<span onClick="document.getElementById('aff').style.backgroundColor ='yellow';" style="cursor: pointer">Jaune</span>
+		<br /> 
+		<span onClick="document.getElementById('aff').style.backgroundColor ='#FFCCFF';"	style="cursor: pointer">Magenta</span>
+		<br /> 
+		<span onClick="document.getElementById('aff').style.backgroundColor ='#CCFFFF';"	style="cursor: pointer">Cyan</span>
+		<br />
+	</div>
+	<div id="aff" style="position: absolute; left: 150px; top: 100px; width: 500px; height: 350px; z-index: 1; background-color: #CC0000;"></div>
+</body>
+</html>

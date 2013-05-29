@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<script type="text/javascript">
+val = 5;
+function decompte()
+{
+	if (valeur==0)
+	{
+	this.close()
+	}
+else
+	{
+	doc = document.getElementById("aff");
+	doc.innerHTML = "<h1>" + valeur + " secondes </h1>";
+	valeur--;	
+	}
+}
+
+function go()
+{
+	doc = document.getElementById("aff");
+	doc.innerHTML = "<h1>" + valeur + "seconde </h1>";
+	valeur--;
+	dec = setInterval('decompte()',1000);
+}
+
+function ferme()
+{
+	this.opener.enfant_m_appelle("popup fermé");
+}
+
+function appel()
+{
+	clearInterval(dec);
+	this.focus();
+	doc = document.getElementById("aff");
+	doc.innerHTML = "<h1>" + popup appele + "</h1>";
+}
+
+</script>
+</head>
+<body onload="go()" onunload="ferme()">
+
+fen popup
+
+<div name="aff" id="aff"></div>
+<br/><br/>
+<input type="button" value="fermeture" onclick="clearInterval(dec)" />
+</body>
+</html>

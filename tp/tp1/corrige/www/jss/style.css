@@ -15,6 +15,9 @@ a {
 }
 .clear {
     clear: both;
+    line-height: 0;
+    font-size: : 1px;
+    color: transparent;
 }
 .wrapper {
     width: 100%;

@@ -1,0 +1,138 @@
+<html>
+<head>
+<title>objet window</title>
+<link href="style.css" rel="stylesheet" type="text/css" />
+<script language="JavaScript" type="text/JavaScript">
+var El = new function(){
+	this.get = function(id){
+	if(document.getElementById(id)){
+	return document.getElementById(id); 
+	}
+	return undefined;
+	};
+	this.test = function(id){
+	if(document.getElementById(id)){
+	return true; 
+	}
+	return false;
+	};
+	this.create = function(name){
+	return document.createElement(name);
+	};
+
+	this.text = function(txt){
+	return document.createTextNode(txt);
+	};
+
+	this.addtext = function(el, txt){
+	el.appendChild(this.text(txt));
+	};
+
+	this.removeAll = function(el){
+	while (el.firstChild) {
+	el.removeChild(el.firstChild);
+	}
+	};
+
+	this.getSelection = function(){
+	if(window.getSelections){
+	return window.getSelection().toString();
+	}
+	else if(document.getSelection){
+	return document.getSelection().toString();
+	}
+	else if(document.selection){
+	return document.selection.createRange().text;
+	}
+	return "";
+	};
+
+	}
+
+var Editor = new function(){
+
+var _this = this;
+this.el = undefined;
+this.html = undefined;
+
+this.addButton = function(txt, func){
+var a = El.create("a");
+a.href = "#";
+a.style.styleFloat = "left";
+a.style.margin = "5px";
+El.addtext(a, txt);
+a.onclick = func;
+this.el.parentNode.insertBefore(a, this.el);
+};
+
+this.addBalise = function(balise){
+var deb = _this.el.selectionStart;
+var end = _this.el.selectionEnd;
+var t = _this.el.value.substring(0, deb);
+t += "<" + balise + ">"
+t += _this.el.value.substring(deb, end);
+t += "</" + balise + ">";
+t += _this.el.value.substring(end, _this.el.value.length);
+_this.el.value = t; 
+_this.show();
+};
+
+this.style = function(el){
+el.style.width = "500px";
+el.style.height = "200px";
+el.style.border = "1px solid #333";
+el.style.padding = "3px";
+el.style.margin = "10px"; 
+el.style.styleFloat = "left";
+el.style.borderRadius = "5px";
+};
+
+this.init = function(id){
+if(! El.test(id)){
+return false;
+}
+this.el = El.get(id);
+this.style(this.el);
+this.html = El.create("div");
+this.html.style.backgroundColor = "#f1f1f1";
+this.style(this.html); 
+this.el.parentNode.insertBefore(this.html, this.el.nextSibling);
+this.addButton("Bold", function(){
+_this.addBalise("b");
+return false;
+});
+this.addButton("Italic", function(){
+_this.addBalise("i");
+return false;
+});
+this.addButton("Underline", function(){
+_this.addBalise("u");
+return false;
+});
+
+var br = El.create("br");
+br.style.clear = "both";
+this.el.parentNode.insertBefore(br, this.el);
+
+this.show = function(){
+_this.html.innerHTML = this.el.value.replace(/\n/g, "<br />");
+};
+
+this.el.onkeyup = function(){ 
+_this.show(); 
+} 
+}
+}
+
+window.onload= function(){
+	Editor.init("texte")
+}
+</script>
+</head>
+<body>
+	<form name="formu" id="formu">
+		<textarea id="texte">Entrer du texte</textarea>
+	</form>
+
+</body>
+</html>

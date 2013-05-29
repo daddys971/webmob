@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="fr">
+<head>
+
+<script lang="javascript" type="text/javascript" src="jss/test.js" />
+
+<script lang="javascript" type="text/javascript">
+	tab_pays = new Array();
+	tab_pays[0] = [ "France", 10 ];
+	tab_pays[1] = [ "Belgique", 12 ];
+	tab_pays[2] = [ "Allemagne", 11 ];
+	tab_pays[3] = [ "Italie", 13 ];
+	tab_pays[4] = [ "Espagne", 14 ];
+
+	sTab = "<table border=1><tr><td>PAYS</td><td>FRAIS</td></tr>"
+	sCombo ="<select>"
+	
+	console.log("start");
+	for (i = 0; i <= 4; i++) {
+		console.log(i);
+		
+		if(i % 2 == 0){ 
+			sTab += "<tr style=\"background-color: white;\">";
+			}
+		else{ 
+			sTab += "<tr style=\"background-color: gray;\">";
+			} 
+		
+		sTab += "<td>" + tab_pays[i][0] + "</td><td>" + tab_pays[i][1] + "</td></tr>"		
+		
+		sCombo += "<option value=\""+tab_pays[i][1]+"\">"+tab_pays[i][0]+"</option>"
+	};
+
+	sTab += "</table><br>"
+	sCombo +="</select>"
+	
+	document.write(sTab+sCombo)
+</script>
+
+</head>
+
+<body>
+	<form>
+	 <input type="number" id="HT" name="PrixHT" />
+	 <select name="Taux">
+	 	<option value="5.5">5,5 %</option>
+	 	<option value="19.6">19,6 %</option> 
+	 </select> 
+	 <input type="button" id="calcul" name="calcul" value="calcul" onclick="Calc_TTC(document.forms[0].PrixHT.value, document.forms[0].Taux.value)"/>
+	 </form>
+</body>
+</html>
